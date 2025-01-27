@@ -13,7 +13,7 @@ import WhatsApp from "@lovethepadel/assets/svgs/WhatsApp.svg?react";
 
 const Homepage = () => {
   const handleRedirect = () => {
-    const phoneNumber = "+9779814305689";
+    const phoneNumber = "+971 4 273 4431";
     window.location.href = `whatsapp://send?phone=${phoneNumber}`;
   };
 
