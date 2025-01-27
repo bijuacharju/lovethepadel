@@ -108,7 +108,7 @@ const JoinLeagueModal = ({
 
   return (
     <DialogRoot
-      placement={"center"}
+      placement={{ base: "top", xl: "center" }}
       motionPreset="slide-in-bottom"
       open={open}
       onOpenChange={() => {
@@ -116,7 +116,7 @@ const JoinLeagueModal = ({
         reset(defaultValues);
       }}
       closeOnInteractOutside={false}
-      size={"cover"}
+      size={{ base: "full", md: "cover" }}
     >
       <DialogContent height={"auto"} bg={"none"} boxShadow={"none"}>
         <form onSubmit={handleSubmit(onSubmitHandler)}>
@@ -131,13 +131,17 @@ const JoinLeagueModal = ({
             gap={"52px"}
           >
             <DialogHeader as={Stack} p={0}>
-              <Text textStyle={"dialogTitle"}>
+              <Text
+                textStyle={"dialogTitle"}
+                fontSize={{ base: "20px", md: "24px" }}
+              >
                 Register Your Team for the League
               </Text>
               <Text
                 textStyle={"paragraph_regular"}
                 color={"gray.normal"}
                 lineHeight={"150%"}
+                fontSize={{ base: "12px", md: "14px" }}
               >
                 Complete the form to sign up and secure your spot in the
                 upcoming league season.
@@ -145,11 +149,11 @@ const JoinLeagueModal = ({
             </DialogHeader>
             <DialogBody p={0}>
               <Stack gap={12}>
-                <Center as={Stack} gap={3}>
+                <Stack gap={3} alignItems={"center"}>
                   <Text textStyle={"paragraph_large"} fontWeight={500}>
                     Preferred Days (Select one)
                   </Text>
-                  <Center as={Stack} gap={1.5}>
+                  <Stack gap={1.5}>
                     <HStack gap={3}>
                       <Button
                         variant={"surface"}
@@ -206,9 +210,9 @@ const JoinLeagueModal = ({
                         {errors.preferredDay.message}
                       </Text>
                     )}
-                  </Center>
-                </Center>
-                <Flex gap={12}>
+                  </Stack>
+                </Stack>
+                <Flex gap={12} flexDirection={{ base: "column", lg: "row" }}>
                   <Stack flex={1} minW={0} flexShrink={0} gap={2}>
                     <HStack gap={3}>
                       <Icon fontSize={24}>
@@ -222,7 +226,10 @@ const JoinLeagueModal = ({
                       flex={1}
                       minW={0}
                       flexShrink={0}
-                      templateColumns={"repeat(2, 1fr)"}
+                      templateColumns={{
+                        base: "repeat(1, 1fr)",
+                        xl: "repeat(2, 1fr)",
+                      }}
                       rowGap={1}
                       columnGap={4}
                     >
@@ -300,7 +307,7 @@ const JoinLeagueModal = ({
                           required
                         />
                       </GridItem>
-                      <GridItem colSpan={2}>
+                      <GridItem colSpan={{ base: 1, xl: 2 }}>
                         <InputField
                           borderRadius={"xl"}
                           variant={"outline"}
@@ -315,7 +322,7 @@ const JoinLeagueModal = ({
                   </Stack>
                   <Box>
                     <Separator
-                      orientation={"vertical"}
+                      orientation={{ base: "horizontal", lg: "vertical" }}
                       borderColor={"gray.lighter"}
                     />
                   </Box>
@@ -332,7 +339,10 @@ const JoinLeagueModal = ({
                       flex={1}
                       minW={0}
                       flexShrink={0}
-                      templateColumns={"repeat(2, 1fr)"}
+                      templateColumns={{
+                        base: "repeat(1, 1fr)",
+                        xl: "repeat(2, 1fr)",
+                      }}
                       rowGap={1}
                       columnGap={4}
                     >
@@ -410,7 +420,7 @@ const JoinLeagueModal = ({
                           required
                         />
                       </GridItem>
-                      <GridItem colSpan={2}>
+                      <GridItem colSpan={{ base: 1, xl: 2 }}>
                         <InputField
                           borderRadius={"xl"}
                           variant={"outline"}
@@ -438,6 +448,7 @@ const JoinLeagueModal = ({
                 textStyle={"paragraph_regular"}
                 color={"black"}
                 fontWeight={500}
+                fontSize={{ base: "10px", xl: "14px" }}
               >
                 * This field is mandatory
               </Text>

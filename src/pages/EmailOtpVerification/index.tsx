@@ -27,7 +27,11 @@ const EmailOtpVerification = () => {
   const onSubmitHandler = () => {};
 
   return (
-    <Stack flex={1} justifyContent={"space-between"}>
+    <Stack
+      flex={1}
+      justifyContent={"space-between"}
+      width={{ base: "full", sm: "460px" }}
+    >
       <Box></Box>
       <Stack gap={10}>
         <HStack gap={2}>
@@ -43,7 +47,7 @@ const EmailOtpVerification = () => {
           </Text>
         </HStack>
         <form onSubmit={handleSubmit(onSubmitHandler)}>
-          <Stack gap={6} width={"460px"}>
+          <Stack gap={6}>
             <Box>
               <Image src={EmailImage} height={"108px"} />
             </Box>

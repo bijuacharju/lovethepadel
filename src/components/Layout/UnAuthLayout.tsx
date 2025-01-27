@@ -111,7 +111,7 @@ const UnAuthLayout = ({ children }: PropsWithChildren) => {
       templateColumns={{ base: "repeat(1, 1fr)", lg: "repeat(2, 1fr)" }}
       backgroundColor={"white"}
       gap={10}
-      padding={10}
+      padding={{ base: 6, sm: 10 }}
     >
       <GridItem
         as={Stack}

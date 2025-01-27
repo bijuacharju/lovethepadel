@@ -42,7 +42,12 @@ const Signup = () => {
   const onSubmitHandler = () => {};
 
   return (
-    <Stack flex={1} justifyContent={"space-between"} gap={5}>
+    <Stack
+      flex={1}
+      justifyContent={"space-between"}
+      gap={5}
+      width={{ base: "full", sm: "460px" }}
+    >
       <Box></Box>
       <Stack gap={10}>
         <HStack gap={2}>
@@ -58,7 +63,7 @@ const Signup = () => {
           </Text>
         </HStack>
         <form onSubmit={handleSubmit(onSubmitHandler)}>
-          <Stack gap={6} width={"460px"}>
+          <Stack gap={6}>
             <Stack gap={1.5}>
               <Text textStyle={"cardTitle"} fontSize={"24px"}>
                 Registration Screen
@@ -68,7 +73,7 @@ const Signup = () => {
               </Text>
             </Stack>
             <Stack>
-              <HStack gap={4}>
+              <HStack gap={4} flexDirection={{ base: "column", sm: "row" }}>
                 <InputField
                   control={control}
                   name={"firstname"}
@@ -78,7 +83,7 @@ const Signup = () => {
                 <InputField
                   control={control}
                   name={"lastname"}
-                  label={"lastName"}
+                  label={"Last Name"}
                   placeholder={"Enter Last Name"}
                 />
               </HStack>

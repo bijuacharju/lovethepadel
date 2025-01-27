@@ -38,7 +38,11 @@ const SetPassword = () => {
   const onSubmitHandler = () => {};
 
   return (
-    <Stack flex={1} justifyContent={"space-between"}>
+    <Stack
+      flex={1}
+      justifyContent={"space-between"}
+      width={{ base: "full", sm: "460px" }}
+    >
       <Box></Box>
       <Stack gap={10}>
         <HStack gap={2}>
@@ -54,7 +58,7 @@ const SetPassword = () => {
           </Text>
         </HStack>
         <form onSubmit={handleSubmit(onSubmitHandler)}>
-          <Stack gap={6} width={"460px"}>
+          <Stack gap={6}>
             <Stack gap={1.5}>
               <Text textStyle={"cardTitle"} fontSize={"24px"}>
                 Set Password
