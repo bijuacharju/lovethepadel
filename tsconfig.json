@@ -1,5 +1,10 @@
 {
   "compilerOptions": {
+    "types": ["node"],
+    "allowJs": true,
+    "target": "ES2022",
+    "useDefineForClassFields": true,
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
 
