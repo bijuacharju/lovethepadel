@@ -1,7 +1,6 @@
-import { Box, HStack, Icon, Image, Span, Stack, Text } from "@chakra-ui/react";
+import { Box, HStack, Image, Span, Stack, Text } from "@chakra-ui/react";
 import { NAVIGATION_ROUTES } from "@lovethepadel/router/routes.constants";
-import { Link } from "react-router-dom";
-import AppLogo from "@lovethepadel/assets/svgs/AppLogo.svg?react";
+import { Link, useNavigate } from "react-router-dom";
 import EmailImage from "@lovethepadel/assets/images/EmailImage.png";
 import { Button } from "@lovethepadel/components/ui/button";
 import { useForm } from "react-hook-form";
@@ -9,6 +8,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import InputField from "@lovethepadel/components/InputField";
 import { IEmailOtpVerificationForm } from "@lovethepadel/@types/pages/emailOtpVerification";
+import ReactPlayer from "react-player";
+import LogoAnimation from "@lovethepadel/assets/videos/logoAnimation.webm";
 
 const defaultValues: IEmailOtpVerificationForm = {
   code: "",
@@ -19,6 +20,7 @@ const schema: yup.ObjectSchema<IEmailOtpVerificationForm> = yup.object({
 });
 
 const EmailOtpVerification = () => {
+  const navigate = useNavigate();
   const { control, handleSubmit } = useForm({
     defaultValues,
     resolver: yupResolver(schema),
@@ -35,9 +37,21 @@ const EmailOtpVerification = () => {
       <Box></Box>
       <Stack gap={10}>
         <HStack gap={2}>
-          <Icon fontSize={{ base: "48px", md: "60px" }}>
-            <AppLogo />
-          </Icon>
+          <Box
+            width={{ base: "48px" }}
+            height={{ base: "48px" }}
+            onClick={() => navigate(NAVIGATION_ROUTES.HOME)}
+            cursor={"pointer"}
+          >
+            <ReactPlayer
+              loop
+              muted
+              playing
+              width={"100%"}
+              height={"100%"}
+              url={LogoAnimation}
+            />
+          </Box>
           <Text
             textStyle={"brandName"}
             color="primary.500"

@@ -1,7 +1,6 @@
-import { Box, HStack, Icon, Span, Stack, Text } from "@chakra-ui/react";
+import { Box, HStack, Span, Stack, Text } from "@chakra-ui/react";
 import { NAVIGATION_ROUTES } from "@lovethepadel/router/routes.constants";
-import { Link } from "react-router-dom";
-import AppLogo from "@lovethepadel/assets/svgs/AppLogo.svg?react";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@lovethepadel/components/ui/button";
 import { ISignupForm } from "@lovethepadel/@types/pages/signup";
 import { useForm } from "react-hook-form";
@@ -9,11 +8,16 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import InputField from "@lovethepadel/components/InputField";
 import SelectField from "@lovethepadel/components/SelectField";
+import ReactPlayer from "react-player";
+import LogoAnimation from "@lovethepadel/assets/videos/logoAnimation.webm";
+import { useSignup } from "@lovethepadel/service/signup";
+import { countries } from "@lovethepadel/utils/countryList";
 
 const defaultValues: ISignupForm = {
   firstname: "",
   lastname: "",
   email: "",
+  country: "ARE",
   phoneNumber: "",
   gender: "",
   playFrequency: "",
@@ -27,6 +31,7 @@ const schema: yup.ObjectSchema<ISignupForm> = yup.object({
     .string()
     .email("Invalid email address")
     .required("Email address is required"),
+  country: yup.string().required("Country is required"),
   phoneNumber: yup.string().required("Phone number is required"),
   gender: yup.string().required("Gender is required"),
   playFrequency: yup.string().required("Play interval is required"),
@@ -34,12 +39,18 @@ const schema: yup.ObjectSchema<ISignupForm> = yup.object({
 });
 
 const Signup = () => {
+  const navigate = useNavigate();
   const { control, handleSubmit } = useForm({
     defaultValues,
     resolver: yupResolver(schema),
   });
+  const { mutateAsync } = useSignup();
 
-  const onSubmitHandler = () => {};
+  const onSubmitHandler = (data: ISignupForm) => {
+    mutateAsync(data).then(() => {
+      navigate(NAVIGATION_ROUTES.HOME);
+    });
+  };
 
   return (
     <Stack
@@ -51,9 +62,21 @@ const Signup = () => {
       <Box></Box>
       <Stack gap={10}>
         <HStack gap={2}>
-          <Icon fontSize={{ base: "48px", md: "60px" }}>
-            <AppLogo />
-          </Icon>
+          <Box
+            width={{ base: "48px" }}
+            height={{ base: "48px" }}
+            onClick={() => navigate(NAVIGATION_ROUTES.HOME)}
+            cursor={"pointer"}
+          >
+            <ReactPlayer
+              loop
+              muted
+              playing
+              width={"100%"}
+              height={"100%"}
+              url={LogoAnimation}
+            />
+          </Box>
           <Text
             textStyle={"brandName"}
             color="primary.500"
@@ -93,12 +116,24 @@ const Signup = () => {
                 label={"Email"}
                 placeholder={"Enter Email Address"}
               />
-              <InputField
-                control={control}
-                name={"phoneNumber"}
-                label={"Phone Number"}
-                placeholder={"Enter Phone Number"}
-              />
+              <HStack gap={4} flexDirection={{ base: "column", sm: "row" }}>
+                <SelectField
+                  control={control}
+                  name="country"
+                  label="Country"
+                  placeholder="Select Country"
+                  selectOptions={countries.map((x) => {
+                    return { label: x.name, value: x.value };
+                  })}
+                  required
+                />
+                <InputField
+                  control={control}
+                  name={"phoneNumber"}
+                  label={"Phone Number"}
+                  placeholder={"Enter Phone Number"}
+                />
+              </HStack>
               <SelectField
                 control={control}
                 name="gender"
@@ -117,12 +152,10 @@ const Signup = () => {
                 label="How Often Do You Play?"
                 placeholder="Select"
                 selectOptions={[
-                  { label: "Daily", value: "DAILY" },
+                  { label: "0-1 times per week", value: "0-1 times per week" },
                   { label: "1-2 times per week", value: "1-2 times per week" },
-                  {
-                    label: "1-2 times per month",
-                    value: "1-2 times per month",
-                  },
+                  { label: "3-4 times per week", value: "3-4 times per week" },
+                  { label: "4+ times per week", value: "4+ times per week" },
                 ]}
                 required
               />
@@ -132,9 +165,14 @@ const Signup = () => {
                 label="What level are you at?"
                 placeholder="Select your level"
                 selectOptions={[
-                  { label: "Beginner", value: "C" },
-                  { label: "Intermediate", value: "B" },
-                  { label: "Advanced", value: "A" },
+                  { label: "Beginner", value: "Beginner" },
+                  { label: "D", value: "D" },
+                  { label: "C-", value: "C-" },
+                  { label: "C", value: "C" },
+                  { label: "C+", value: "C+" },
+                  { label: "B-", value: "B-" },
+                  { label: "B", value: "B" },
+                  { label: "Don't know", value: "Don't know" },
                 ]}
                 required
               />

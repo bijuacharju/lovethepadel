@@ -13,7 +13,6 @@ import {
 } from "@chakra-ui/react";
 import { NAVIGATION_ROUTES } from "@lovethepadel/router/routes.constants";
 import { Link } from "react-router-dom";
-import AppLogo from "@lovethepadel/assets/svgs/AppLogo.svg?react";
 import MenuIcon from "@lovethepadel/assets/svgs/MenuIcon.svg?react";
 import ArrowCircleRightIcon from "@lovethepadel/assets/svgs/ArrowCircleRightIcon.svg?react";
 import CloseIcon from "@lovethepadel/assets/svgs/CloseIcon.svg?react";
@@ -24,6 +23,8 @@ import {
   DrawerRoot,
 } from "@lovethepadel/components/ui/drawer";
 import { SliderEventComponent } from "./Events";
+import ReactPlayer from "react-player";
+import LogoAnimation from "@lovethepadel/assets/videos/logoAnimation.webm";
 
 const HeaderDrawer = ({
   open,
@@ -233,12 +234,22 @@ const Header = () => {
       backgroundColor={"primary.50"}
       zIndex={1000}
     >
-      <Container paddingY={2.5} height={"90px"}>
+      <Container paddingY={5} height={{ base: "88px", md: "120px" }}>
         <HStack justifyContent={"space-between"}>
           <HStack gap={2}>
-            <Icon fontSize={{ base: "48px", md: "60px" }}>
-              <AppLogo />
-            </Icon>
+            <Box
+              width={{ base: "48px", md: "80px" }}
+              height={{ base: "48px", md: "80px" }}
+            >
+              <ReactPlayer
+                loop
+                muted
+                playing
+                width={"100%"}
+                height={"100%"}
+                url={LogoAnimation}
+              />
+            </Box>
             <Text
               textStyle={"brandName"}
               color="primary.500"
@@ -248,14 +259,14 @@ const Header = () => {
             </Text>
           </HStack>
           <HStack gap={5}>
-            <Link to={NAVIGATION_ROUTES.SIGNIN}>
+            <Link to={NAVIGATION_ROUTES.SIGNUP}>
               <Span
                 textDecoration={"none"}
                 color={"gray.darkest"}
                 fontWeight={500}
                 fontSize={{ base: "14px", md: "16px" }}
               >
-                SignIn
+                Sign Up
               </Span>
             </Link>
             <IconButton

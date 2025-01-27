@@ -1,4 +1,4 @@
-import { Stack } from "@chakra-ui/react";
+import { Icon, IconButton, Stack } from "@chakra-ui/react";
 import DownloadApp from "@lovethepadel/components/Homepage/DownloadApp";
 import Events from "@lovethepadel/components/Homepage/Events";
 import Footer from "@lovethepadel/components/Homepage/Footer";
@@ -9,8 +9,14 @@ import Membership from "@lovethepadel/components/Homepage/Membership";
 import Mission from "@lovethepadel/components/Homepage/Mission";
 import OurPartners from "@lovethepadel/components/Homepage/OurPartners";
 import Testimonial from "@lovethepadel/components/Homepage/Testimonial";
+import WhatsApp from "@lovethepadel/assets/svgs/WhatsApp.svg?react";
 
 const Homepage = () => {
+  const handleRedirect = () => {
+    const phoneNumber = "+9779814305689";
+    window.location.href = `whatsapp://send?phone=${phoneNumber}`;
+  };
+
   return (
     <Stack
       minH={"100vh"}
@@ -30,6 +36,20 @@ const Homepage = () => {
       </Stack>
       <OurPartners />
       <Footer />
+      <IconButton
+        variant={"ghost"}
+        position={"fixed"}
+        zIndex={1100}
+        right={{ base: 4, md: 10, xl: 14 }}
+        bottom={{ base: 4, md: 10, xl: 14 }}
+        height={"max-content"}
+        width={"max-content"}
+        onClick={handleRedirect}
+      >
+        <Icon>
+          <WhatsApp />
+        </Icon>
+      </IconButton>
     </Stack>
   );
 };

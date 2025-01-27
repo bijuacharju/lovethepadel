@@ -1,13 +1,14 @@
-import { Box, HStack, Icon, Span, Stack, Text } from "@chakra-ui/react";
+import { Box, HStack, Span, Stack, Text } from "@chakra-ui/react";
 import { NAVIGATION_ROUTES } from "@lovethepadel/router/routes.constants";
-import { Link } from "react-router-dom";
-import AppLogo from "@lovethepadel/assets/svgs/AppLogo.svg?react";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@lovethepadel/components/ui/button";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import InputField from "@lovethepadel/components/InputField";
 import { ISetPasswordForm } from "@lovethepadel/@types/pages/setPassword";
+import ReactPlayer from "react-player";
+import LogoAnimation from "@lovethepadel/assets/videos/logoAnimation.webm";
 
 const defaultValues: ISetPasswordForm = {
   password: "",
@@ -30,6 +31,7 @@ const schema: yup.ObjectSchema<ISetPasswordForm> = yup.object({
 });
 
 const SetPassword = () => {
+  const navigate = useNavigate();
   const { control, handleSubmit } = useForm({
     defaultValues,
     resolver: yupResolver(schema),
@@ -46,9 +48,21 @@ const SetPassword = () => {
       <Box></Box>
       <Stack gap={10}>
         <HStack gap={2}>
-          <Icon fontSize={{ base: "48px", md: "60px" }}>
-            <AppLogo />
-          </Icon>
+          <Box
+            width={{ base: "48px" }}
+            height={{ base: "48px" }}
+            onClick={() => navigate(NAVIGATION_ROUTES.HOME)}
+            cursor={"pointer"}
+          >
+            <ReactPlayer
+              loop
+              muted
+              playing
+              width={"100%"}
+              height={"100%"}
+              url={LogoAnimation}
+            />
+          </Box>
           <Text
             textStyle={"brandName"}
             color="primary.500"

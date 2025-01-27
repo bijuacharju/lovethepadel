@@ -12,17 +12,8 @@ const login = (data: ISigninForm) => {
 };
 
 const useLogin = () => {
-  //   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: login,
-    // onSuccess: (response) => {
-    //   successNotification(response?.data.message);
-    //   queryClient.invalidateQueries({ queryKey: ["init"] });
-    // },
-    // onError: (error: ApiErrorResponse) => {
-    //   const errorMessage = error.response?.data?.error?.errorMessage;
-    //   errorNotification(errorMessage);
-    // },
   });
 };
 

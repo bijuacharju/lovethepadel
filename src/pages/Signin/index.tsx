@@ -1,7 +1,6 @@
-import { Box, HStack, Icon, Span, Stack, Text } from "@chakra-ui/react";
+import { Box, HStack, Span, Stack, Text } from "@chakra-ui/react";
 import { NAVIGATION_ROUTES } from "@lovethepadel/router/routes.constants";
-import { Link } from "react-router-dom";
-import AppLogo from "@lovethepadel/assets/svgs/AppLogo.svg?react";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@lovethepadel/components/ui/button";
 import { Checkbox } from "@lovethepadel/components/ui/checkbox";
 import { useForm } from "react-hook-form";
@@ -10,6 +9,8 @@ import * as yup from "yup";
 import { ISigninForm } from "@lovethepadel/@types/pages/signin";
 import InputField from "@lovethepadel/components/InputField";
 import { useEffect, useState } from "react";
+import ReactPlayer from "react-player";
+import LogoAnimation from "@lovethepadel/assets/videos/logoAnimation.webm";
 
 const defaultValues: ISigninForm = {
   email: "",
@@ -25,6 +26,7 @@ const schema: yup.ObjectSchema<ISigninForm> = yup.object({
 });
 
 const Signin = () => {
+  const navigate = useNavigate();
   const [remember, setRemember] = useState(false);
   const { control, handleSubmit } = useForm({
     defaultValues,
@@ -50,9 +52,21 @@ const Signin = () => {
       <Box></Box>
       <Stack gap={10}>
         <HStack gap={2}>
-          <Icon fontSize={{ base: "48px", md: "60px" }}>
-            <AppLogo />
-          </Icon>
+          <Box
+            width={{ base: "48px" }}
+            height={{ base: "48px" }}
+            onClick={() => navigate(NAVIGATION_ROUTES.HOME)}
+            cursor={"pointer"}
+          >
+            <ReactPlayer
+              loop
+              muted
+              playing
+              width={"100%"}
+              height={"100%"}
+              url={LogoAnimation}
+            />
+          </Box>
           <Text
             textStyle={"brandName"}
             color="primary.500"
